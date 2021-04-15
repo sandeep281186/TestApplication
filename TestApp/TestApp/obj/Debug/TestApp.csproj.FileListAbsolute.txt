@@ -1,0 +1,10 @@
+C:\Users\amit1\source\repos\GithubProjects\TestApplication\TestApp\TestApp\bin\Debug\TestApp.exe.config
+C:\Users\amit1\source\repos\GithubProjects\TestApplication\TestApp\TestApp\bin\Debug\TestApp.exe
+C:\Users\amit1\source\repos\GithubProjects\TestApplication\TestApp\TestApp\bin\Debug\TestApp.pdb
+C:\Users\amit1\source\repos\GithubProjects\TestApplication\TestApp\TestApp\obj\Debug\TestApp.MainForm.resources
+C:\Users\amit1\source\repos\GithubProjects\TestApplication\TestApp\TestApp\obj\Debug\TestApp.Properties.Resources.resources
+C:\Users\amit1\source\repos\GithubProjects\TestApplication\TestApp\TestApp\obj\Debug\TestApp.csproj.GenerateResource.cache
+C:\Users\amit1\source\repos\GithubProjects\TestApplication\TestApp\TestApp\obj\Debug\TestApp.csproj.CoreCompileInputs.cache
+C:\Users\amit1\source\repos\GithubProjects\TestApplication\TestApp\TestApp\obj\Debug\TestApp.exe
+C:\Users\amit1\source\repos\GithubProjects\TestApplication\TestApp\TestApp\obj\Debug\TestApp.pdb
+C:\Users\amit1\source\repos\GithubProjects\TestApplication\TestApp\TestApp\obj\Debug\TestApp.csprojAssemblyReference.cache
