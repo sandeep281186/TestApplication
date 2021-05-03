@@ -11,6 +11,7 @@ namespace TestApp
 {
     class Program
     {
+        [STAThread]
         static void Main(string[] args)
         {
             Application.EnableVisualStyles();
