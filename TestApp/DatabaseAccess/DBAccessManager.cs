@@ -91,7 +91,7 @@ namespace DatabaseAccess
 
     public class DBAccessManager : IDisposable
     {
-        private string connectionString = @"Data Source=C:\Users\amit1\source\repos\GithubProjects\TestApplication\TestApp\TestApp\DB\TurretDB.db";
+        private string connectionString = @"Data Source=..\..\DB\TurretDB.db";
         private SqliteConnection conn = null;
         private static DBAccessManager manager;
 
@@ -185,37 +185,6 @@ namespace DatabaseAccess
             catch (Exception ex)
             {
                
-            }
-
-            return dt;
-        }
-
-        public DataTable GetUserData(string userName)
-        {
-            DataTable dt = new DataTable();
-            dt.Columns.Add("Key Label");
-            dt.Columns.Add("Page Name");
-            dt.Columns.Add("Page Number");
-            dt.Columns.Add("Key Index");
-
-            try
-            {
-                using (var command = conn.CreateCommand())
-                {
-                    command.CommandText = "Select * from iTurretData where USER='" + userName + "'";
-
-                    using (SqliteDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            dt.Rows.Add(new object[] { reader.GetString(3), reader.GetString(4), reader.GetString(5), reader.GetString(6) });
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-
             }
 
             return dt;

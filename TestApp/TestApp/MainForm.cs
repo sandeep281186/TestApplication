@@ -23,6 +23,7 @@ namespace TestApp
         private List<MainMenu> menus;
         private DataTable turretUserData;
         private DataTable selectedUserData;
+        private int activeMenuIndex = 0;
 
         public MainForm()
         {
@@ -81,8 +82,8 @@ namespace TestApp
             comboBoxUserList.DataSource = _dbManager.GetUsers();
             comboBoxUserList.DisplayMember = "USER";
             comboBoxUserList.BindingContext = this.BindingContext;
-            comboBoxUserList.SelectedIndex = -1;
-            comboBoxUserList.Update();
+            //comboBoxUserList.SelectedIndex = -1;
+            //comboBoxUserList.Update();
         }
 
         private void LoadPageData()
@@ -143,16 +144,6 @@ namespace TestApp
             }
         }
 
-        private void buttonUp_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void buttonDown_Click(object sender, EventArgs e)
-        {
-
-        }
-   
         private List<Record> GetIndexes(DataTable dt, int pageNum)
         {
             List<Record> keyIndexesAndLabels = new List<Record>();
@@ -189,17 +180,26 @@ namespace TestApp
                 Clear();
                 MainMenu m = menus[index];
                 m.PageIndexes = new Dictionary<int, List<Record>>();
+                bool load = true;
 
                 foreach (int page in m.Pages)
                 {
-                    m.PageIndexes.Add(page, GetIndexes(selectedUserData, page));
+                    List<Record> rcds = GetIndexes(selectedUserData, page);
 
-                    if(m.PageIndexes[page].Count > 0)
+                    if (rcds.Count > 0)
                     {
-                        foreach (Record rec in m.PageIndexes[page])
-                        {
-                            Button button = this.Controls.Find("buttonIndex" + rec.PageIndex, false)[0] as Button;
-                            button.Text = rec.KeyLabel;
+                        m.PageIndexes.Add(page, rcds);
+
+                        if (load)
+                        {                           
+                            load = false;
+                            labelPSD1.Text = m.Name + "-" + page;
+
+                            foreach (Record rec in m.PageIndexes[page])
+                            {
+                                Button button = this.Controls.Find("buttonIndex" + rec.PageIndex, false)[0] as Button;
+                                button.Text = rec.KeyLabel;
+                            }
                         }
                     }
                 }
@@ -208,13 +208,13 @@ namespace TestApp
 
         private void comboBoxUserList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            DataRowView drv = comboBoxUserList.SelectedValue as DataRowView;
+            DataRowView drv = comboBoxUserList.SelectedItem as DataRowView;
 
             if (drv != null)
             {
                 string usr = drv[0].ToString();
                 selectedUserData = GetUserData(usr);
-                LoadIndexesForMenus(0);
+                LoadIndexesForMenus(activeMenuIndex);
             }              
         }
 
@@ -227,42 +227,42 @@ namespace TestApp
 
         private void button1_Click(object sender, EventArgs e)
         {
-            LoadIndexesForMenus(0);
+            LoadIndexesForMenus(activeMenuIndex=0);
         }
 
         private void buttonDialtone_Click(object sender, EventArgs e)
         {
-            LoadIndexesForMenus(1);
+            LoadIndexesForMenus(activeMenuIndex = 1);
         }
 
         private void buttonTeamSpeedDials_Click(object sender, EventArgs e)
         {
-            LoadIndexesForMenus(2);
+            LoadIndexesForMenus(activeMenuIndex = 2);
         }
 
         private void buttonPersonalSpeedDials_Click(object sender, EventArgs e)
         {
-            LoadIndexesForMenus(3);
+            LoadIndexesForMenus(activeMenuIndex = 3);
         }
 
         private void buttonPrivateWires_Click(object sender, EventArgs e)
         {
-            LoadIndexesForMenus(4);
+            LoadIndexesForMenus(activeMenuIndex = 4);
         }
 
         private void buttonIntercomSpeedDials_Click(object sender, EventArgs e)
         {
-            LoadIndexesForMenus(5);
+            LoadIndexesForMenus(activeMenuIndex = 5);
         }
 
         private void buttonActivityPage_Click(object sender, EventArgs e)
         {
-            LoadIndexesForMenus(6);
+            LoadIndexesForMenus(activeMenuIndex = 6);
         }
 
         private void buttonCallRegisterShortcut_Click(object sender, EventArgs e)
         {
-            LoadIndexesForMenus(7);
+            LoadIndexesForMenus(activeMenuIndex = 7);
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -282,6 +282,49 @@ namespace TestApp
         {
 
         }
+
+        private void buttonIndex0_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonPREV_Click(object sender, EventArgs e)
+        {
+            MainMenu mm = menus[activeMenuIndex];
+
+            if (mm.PageIndexes.Count > 0)
+            {
+                Clear();
+                int prevPage = mm.PageIndexes.ElementAt((int)Math.Max(mm.activePage - 1, 0)).Key;
+                mm.activePage = (int)Math.Max(mm.activePage - 1, 0);
+                labelPSD1.Text = mm.Name + "-" + prevPage;
+
+                foreach (Record rec in mm.PageIndexes[prevPage])
+                {
+                    Button button = this.Controls.Find("buttonIndex" + rec.PageIndex, false)[0] as Button;
+                    button.Text = rec.KeyLabel;
+                }
+            }
+        }
+
+        private void buttonNext_Click(object sender, EventArgs e)
+        {
+            MainMenu mm = menus[activeMenuIndex];
+
+            if (mm.PageIndexes.Count > 0)
+            {
+                Clear();
+                int nextPage = mm.PageIndexes.ElementAt((int)Math.Min(mm.activePage + 1, mm.PageIndexes.Count - 1)).Key;
+                mm.activePage = (int)Math.Min(mm.activePage + 1, mm.PageIndexes.Count - 1);
+                labelPSD1.Text = mm.Name + "-" + nextPage;
+
+                foreach (Record rec in mm.PageIndexes[nextPage])
+                {
+                    Button button = this.Controls.Find("buttonIndex" + rec.PageIndex, false)[0] as Button;
+                    button.Text = rec.KeyLabel;
+                }
+            }
+        }
     }
 
     public class MainMenu
@@ -289,6 +332,12 @@ namespace TestApp
         public string Name { get; set; }
         public List<int> Pages { get; set; }
         public Dictionary<int, List<Record>> PageIndexes { get; set; }
+        public int activePage { get; set; }
+
+        public MainMenu()
+        {
+            activePage = 0;
+        }
     }
 
     public class Record
