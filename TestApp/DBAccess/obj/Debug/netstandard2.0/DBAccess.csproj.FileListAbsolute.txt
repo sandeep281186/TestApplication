@@ -1,9 +1,0 @@
-C:\Users\amit1\source\repos\GithubProjects\TestApplication\TestApp\DBAccess\bin\Debug\netstandard2.0\DBAccess.deps.json
-C:\Users\amit1\source\repos\GithubProjects\TestApplication\TestApp\DBAccess\bin\Debug\netstandard2.0\DBAccess.dll
-C:\Users\amit1\source\repos\GithubProjects\TestApplication\TestApp\DBAccess\bin\Debug\netstandard2.0\DBAccess.pdb
-C:\Users\amit1\source\repos\GithubProjects\TestApplication\TestApp\DBAccess\obj\Debug\netstandard2.0\DBAccess.csproj.CoreCompileInputs.cache
-C:\Users\amit1\source\repos\GithubProjects\TestApplication\TestApp\DBAccess\obj\Debug\netstandard2.0\DBAccess.AssemblyInfoInputs.cache
-C:\Users\amit1\source\repos\GithubProjects\TestApplication\TestApp\DBAccess\obj\Debug\netstandard2.0\DBAccess.AssemblyInfo.cs
-C:\Users\amit1\source\repos\GithubProjects\TestApplication\TestApp\DBAccess\obj\Debug\netstandard2.0\DBAccess.dll
-C:\Users\amit1\source\repos\GithubProjects\TestApplication\TestApp\DBAccess\obj\Debug\netstandard2.0\DBAccess.pdb
-C:\Users\amit1\source\repos\GithubProjects\TestApplication\TestApp\DBAccess\obj\Debug\netstandard2.0\DBAccess.csprojAssemblyReference.cache
