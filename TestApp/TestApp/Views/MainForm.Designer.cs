@@ -324,7 +324,6 @@
             this.buttonIndex0.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.buttonIndex0.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
             this.buttonIndex0.UseVisualStyleBackColor = false;
-
             // 
             // buttonIndex22
             // 
@@ -553,7 +552,6 @@
             this.buttonIndex8.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.buttonIndex8.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
             this.buttonIndex8.UseVisualStyleBackColor = false;
-
             // 
             // buttonIndex30
             // 
@@ -668,7 +666,6 @@
             this.buttonIndex24.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.buttonIndex24.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
             this.buttonIndex24.UseVisualStyleBackColor = false;
-
             // 
             // buttonIndex38
             // 

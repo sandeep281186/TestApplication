@@ -1,13 +1,11 @@
 ﻿using DatabaseAccess;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using TestApp.Views;
 
 namespace TestApp
 {
@@ -127,25 +125,15 @@ namespace TestApp
 
         private void buttonLoadExcel_Click(object sender, EventArgs e)
         {
-            using (FileDialog fd = new OpenFileDialog())
-            {
-                fd.FileName = "Excel File(*.xls,*.xlsx) | *.xls;*.xlsx";
+            DataImportWizardP1 frmP1 = new DataImportWizardP1();
 
-                if (fd.ShowDialog() == DialogResult.OK)
+            if(frmP1.ShowDialog() == DialogResult.OK)
+            {
+                DataImportWizardP2 frmP2 = new DataImportWizardP2(frmP1.GetSelectedFile());
+
+                if(frmP2.ShowDialog() == DialogResult.OK)
                 {
-                    using (ExcelReader reader = new ExcelReader(fd.FileName))
-                    {
-                        List<TurretData> recs = reader.LoadData();
-                        {
-                            if (_dbManager.ExecuteSql(recs))
-                            {
-                                LoadCombobox();
-                                MessageBox.Show("Import Success.");
-                            }
-                            else
-                                MessageBox.Show("Import data failed.");
-                        }
-                    }
+                    LoadCombobox();
                 }
             }
         }

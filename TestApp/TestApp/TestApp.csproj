@@ -67,6 +67,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExcelReader.cs" />
+    <Compile Include="Views\DataImportWizardP1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\DataImportWizardP1.Designer.cs">
+      <DependentUpon>DataImportWizardP1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DataImportWizardP2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\DataImportWizardP2.Designer.cs">
+      <DependentUpon>DataImportWizardP2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -93,6 +105,12 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Views\DataImportWizardP1.resx">
+      <DependentUpon>DataImportWizardP1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\DataImportWizardP2.resx">
+      <DependentUpon>DataImportWizardP2.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
