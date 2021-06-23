@@ -833,10 +833,11 @@
             this.buttonLoadExcel.Name = "buttonLoadExcel";
             this.buttonLoadExcel.Size = new System.Drawing.Size(16, 529);
             this.buttonLoadExcel.TabIndex = 91;
-            this.buttonLoadExcel.Text = "Load iTurret Users";
+            this.buttonLoadExcel.Text = "Load iTurret Users      ";
             this.buttonLoadExcel.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
             this.buttonLoadExcel.UseVisualStyleBackColor = false;
             this.buttonLoadExcel.Click += new System.EventHandler(this.buttonLoadExcel_Click);
+            this.buttonLoadExcel.Paint += new System.Windows.Forms.PaintEventHandler(this.buttonLoadExcel_Paint);
             // 
             // comboBoxUserList
             // 

@@ -33,6 +33,7 @@ namespace TestApp
             _dbManager = DBAccessManager.GetInstance();          
             AddMenus();
             isDirty = false;
+            //buttonUpdate.Text = "U" + "\n" + "P" + "\n" + "D" + "\n" + "A" + "\n" + "T" + "\n" + "E";
         }
 
         private MainMenu GetMenu(string name, int start, int end)
@@ -356,21 +357,24 @@ namespace TestApp
 
                     foreach(DataRow dr in dtUpdated.Rows)
                     {
-                        List<DataRow> rowToUpdate = turretUserDataUpdates.AsEnumerable().Where(x => x.Field<string>("USER").Equals(selectedUserData.Rows[0]["USER"].ToString()) && x.Field<int>("Page Number")==pages.Key && x.Field<int>("Key Index")==dr.Table.Rows.IndexOf(dr)).ToList();
+                        List<DataRow> rowToUpdate = turretUserDataUpdates.AsEnumerable().Where(x => x.Field<string>("USER").Equals(selectedUserData.Rows[0]["USER"].ToString()) && 
+                                                    x.Field<int>("Page Number")==pages.Key && x.Field<int>("Key Index")==dr.Table.Rows.IndexOf(dr)).ToList();
                         
                         if (rowToUpdate != null && rowToUpdate.Count > 0)
                         {
                             rowToUpdate[0]["Key Label"] = dr["S1"];
                         }
 
-                        rowToUpdate = turretUserDataUpdates.AsEnumerable().Where(x => x.Field<string>("USER").Equals(selectedUserData.Rows[0]["USER"].ToString()) && x.Field<int>("Page Number") == pages.Key && x.Field<int>("Key Index") == dr.Table.Rows.IndexOf(dr) + 8).ToList();
+                        rowToUpdate = turretUserDataUpdates.AsEnumerable().Where(x => x.Field<string>("USER").Equals(selectedUserData.Rows[0]["USER"].ToString()) && 
+                                      x.Field<int>("Page Number") == pages.Key && x.Field<int>("Key Index") == dr.Table.Rows.IndexOf(dr) + 8).ToList();
 
                         if (rowToUpdate != null && rowToUpdate.Count > 0)
                         {
                             rowToUpdate[0]["Key Label"] = dr["S2"];
                         }
 
-                        rowToUpdate = turretUserDataUpdates.AsEnumerable().Where(x => x.Field<string>("USER").Equals(selectedUserData.Rows[0]["USER"].ToString()) && x.Field<int>("Page Number") == pages.Key && x.Field<int>("Key Index") == dr.Table.Rows.IndexOf(dr) + 16).ToList();
+                        rowToUpdate = turretUserDataUpdates.AsEnumerable().Where(x => x.Field<string>("USER").Equals(selectedUserData.Rows[0]["USER"].ToString()) && 
+                                      x.Field<int>("Page Number") == pages.Key && x.Field<int>("Key Index") == dr.Table.Rows.IndexOf(dr) + 16).ToList();
 
                         if (rowToUpdate != null && rowToUpdate.Count > 0)
                         {
@@ -388,6 +392,8 @@ namespace TestApp
                         selectedUserData.AcceptChanges();
                         LoadIndexesForMenus(activeMenuIndex);
                         labelPSD1.Text = labelPSD2.Text = labelPSD3.Text = mm.Name + "-" + pages.Key;
+                        mm = menus[activeMenuIndex];
+                        Clear();
 
                         foreach (Record rec in mm.PageIndexes[pages.Key])
                         {
@@ -398,6 +404,18 @@ namespace TestApp
                     }
                 }
             }
+        }
+
+        private void buttonLoadExcel_Paint(object sender, PaintEventArgs e)
+        {
+            //using (Graphics g = e.Graphics)
+            //{
+            //    SizeF s = g.MeasureString(buttonLoadExcel.Text, buttonLoadExcel.Font);
+            //    g.TranslateTransform(buttonLoadExcel.Location.X, buttonLoadExcel.Location.Y) ;
+            //    g.RotateTransform(90);
+            //    g.DrawString(buttonLoadExcel.Text, buttonLoadExcel.Font, Brushes.White, buttonLoadExcel.Location);
+            //    g.ResetTransform();
+            //}
         }
     }
 

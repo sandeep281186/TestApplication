@@ -20,6 +20,7 @@ namespace TestApp
         private Application _excelApp;
         private Workbook _excelWorkbook;
         private List<string> _sheets;
+        private const string _dataSheetName = "iTurretData";
          
         public ExcelReader(string excelFilePath)
         {
@@ -77,7 +78,7 @@ namespace TestApp
             {
                 if (Read())
                 {
-                    worksheet = _excelWorkbook.Worksheets["iTurretData"] as Worksheet;
+                    worksheet = _excelWorkbook.Worksheets[_dataSheetName] as Worksheet;
 
                     Range range = worksheet.UsedRange;
                     int rowCount = range.Rows.Count;
