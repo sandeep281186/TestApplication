@@ -3,5 +3,5 @@
 ################################################################################
 
 /.vs
-/TestApp/.vs/TestApp/v15/Server/sqlite3
-/TestApp/packages
+/iTurret/.vs/iTurret/v15/Server/sqlite3
+/iTurret/packages
