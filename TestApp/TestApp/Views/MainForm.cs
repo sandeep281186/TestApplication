@@ -74,11 +74,7 @@ namespace TestApp
                 this._aspectDims.Add(c.Name, new List<float>() { aspectWidth, aspectHeight });
             }
 
-            turretUserData = _dbManager.LoadTurretData();
-            turretUserData.AcceptChanges();
-            turretUserDataUpdates = turretUserData.Copy();//.DefaultView.ToTable();
-            turretUserDataUpdates.AcceptChanges();
-            LoadCombobox();
+            RefreshData();
         }
 
         private void LoadCombobox()
@@ -86,13 +82,18 @@ namespace TestApp
             comboBoxUserList.DataSource = _dbManager.GetUsers();
             comboBoxUserList.DisplayMember = "USER";
             comboBoxUserList.BindingContext = this.BindingContext;
+            comboBoxUserList.Update();
             //comboBoxUserList.SelectedIndex = -1;
             //comboBoxUserList.Update();
         }
 
-        private void LoadPageData()
+        private void RefreshData()
         {
-
+            turretUserData = _dbManager.LoadTurretData();
+            turretUserData.AcceptChanges();
+            turretUserDataUpdates = turretUserData.Copy();//.DefaultView.ToTable();
+            turretUserDataUpdates.AcceptChanges();
+            LoadCombobox();
         }
 
         private void MainForm_SizeChanged(object sender, EventArgs e)
@@ -133,7 +134,7 @@ namespace TestApp
 
                 if(frmP2.ShowDialog() == DialogResult.OK)
                 {
-                    LoadCombobox();
+                    RefreshData();
                 }
             }
         }
@@ -169,7 +170,7 @@ namespace TestApp
 
         private void LoadIndexesForMenus(int index)
         {
-            //foreach(MainMenu m in menus)
+            if(selectedUserData != null)
             {
                 Clear();
                 MainMenu m = menus[index];
@@ -208,6 +209,7 @@ namespace TestApp
             {
                 string usr = drv[0].ToString();
                 selectedUserData = GetUserData(usr);
+                selectedUserData.AcceptChanges();
                 LoadIndexesForMenus(activeMenuIndex);
             }              
         }
@@ -356,21 +358,21 @@ namespace TestApp
 
                     foreach(DataRow dr in dtUpdated.Rows)
                     {
-                        List<DataRow> rowToUpdate = turretUserDataUpdates.AsEnumerable().Where(x => x.Field<int>("Page Number")==pages.Key && x.Field<int>("Key Index")==dr.Table.Rows.IndexOf(dr)).ToList();
+                        List<DataRow> rowToUpdate = turretUserDataUpdates.AsEnumerable().Where(x => x.Field<string>("USER").Equals(selectedUserData.Rows[0]["USER"].ToString()) && x.Field<int>("Page Number")==pages.Key && x.Field<int>("Key Index")==dr.Table.Rows.IndexOf(dr)).ToList();
                         
                         if (rowToUpdate != null && rowToUpdate.Count > 0)
                         {
                             rowToUpdate[0]["Key Label"] = dr["S1"];
                         }
 
-                        rowToUpdate = turretUserDataUpdates.AsEnumerable().Where(x => x.Field<int>("Page Number") == pages.Key && x.Field<int>("Key Index") == dr.Table.Rows.IndexOf(dr) + 8).ToList();
+                        rowToUpdate = turretUserDataUpdates.AsEnumerable().Where(x => x.Field<string>("USER").Equals(selectedUserData.Rows[0]["USER"].ToString()) && x.Field<int>("Page Number") == pages.Key && x.Field<int>("Key Index") == dr.Table.Rows.IndexOf(dr) + 8).ToList();
 
                         if (rowToUpdate != null && rowToUpdate.Count > 0)
                         {
                             rowToUpdate[0]["Key Label"] = dr["S2"];
                         }
 
-                        rowToUpdate = turretUserDataUpdates.AsEnumerable().Where(x => x.Field<int>("Page Number") == pages.Key && x.Field<int>("Key Index") == dr.Table.Rows.IndexOf(dr) + 16).ToList();
+                        rowToUpdate = turretUserDataUpdates.AsEnumerable().Where(x => x.Field<string>("USER").Equals(selectedUserData.Rows[0]["USER"].ToString()) && x.Field<int>("Page Number") == pages.Key && x.Field<int>("Key Index") == dr.Table.Rows.IndexOf(dr) + 16).ToList();
 
                         if (rowToUpdate != null && rowToUpdate.Count > 0)
                         {
@@ -385,6 +387,7 @@ namespace TestApp
                     {
                         string usr = drv[0].ToString();
                         selectedUserData = GetUserData(usr);
+                        selectedUserData.AcceptChanges();
                         LoadIndexesForMenus(activeMenuIndex);
                         labelPSD1.Text = labelPSD2.Text = labelPSD3.Text = mm.Name + "-" + pages.Key;
 
