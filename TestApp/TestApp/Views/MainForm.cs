@@ -83,15 +83,13 @@ namespace TestApp
             comboBoxUserList.DisplayMember = "USER";
             comboBoxUserList.BindingContext = this.BindingContext;
             comboBoxUserList.Update();
-            //comboBoxUserList.SelectedIndex = -1;
-            //comboBoxUserList.Update();
         }
 
         private void RefreshData()
         {
             turretUserData = _dbManager.LoadTurretData();
             turretUserData.AcceptChanges();
-            turretUserDataUpdates = turretUserData.Copy();//.DefaultView.ToTable();
+            turretUserDataUpdates = turretUserData.Copy();
             turretUserDataUpdates.AcceptChanges();
             LoadCombobox();
         }
